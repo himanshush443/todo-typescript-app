@@ -10,7 +10,6 @@ const NewTodo: React.FC<UpdateTodo> = props => {
     const TodoSubmitHandler = (event: React.FormEvent) => {
         event.preventDefault();
         const enteredText = textInputref.current!.value;
-        // console.log(enteredText);
         props.updateTodo(enteredText);
         textInputref.current!.value = '';
     };

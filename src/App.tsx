@@ -6,11 +6,17 @@ import {Todo} from './components/TodoList';
 
 function App() {
   const [todos, setTodos] = useState<Array<Todo>>([]);
-
+  
   const onreadystatechange = (data: string) => {
+    if(!data)
+      return;
+    if(todos.find(todo => todo.text===data)) {
+      alert('This todo is already present at position: '+ (todos.findIndex(todo => todo.text===data)+1))
+      return;
+    }
     setTodos(prevTodos => [
       ...prevTodos,
-      { id: Math.random().toString(), text: data}
+      { id: Math.floor(Math.random()*100).toString(), text: data}
     ]);
   }
 
@@ -24,9 +30,10 @@ function App() {
   return (
     <div className="App">
       <NewTodo updateTodo={onreadystatechange} />
-      <TodoList items={todos} DeleteTodo={DeleteTodo}/>
+      <TodoList items={todos} DeleteTodo={DeleteTodo} />
     </div>
   );
 }
 
 export default App;
+
